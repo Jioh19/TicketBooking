@@ -4,31 +4,26 @@ using System.Globalization;
 using System.Text;
 using TicketBooking.Domain.Models;
 using TicketBooking.Domain.Repositories;
+using TicketBooking.Infrastructure.Utils;
 
 namespace TicketBooking.Infrastructure.Repositories;
 
 public class FlightRepository : IFlightRepository
 {
-    private readonly string _csvFilePath;
+    private readonly string _csvFilePath = PathParser.GetPath("flight_data.csv");
     private readonly CsvConfiguration _csvConfig;
 
-    private const string DefaultCsvFilePath = "../../../csv/flight_data.csv";
-
-    public FlightRepository() : this(DefaultCsvFilePath) { }
-
-    public FlightRepository(string csvFilePath)
+    public FlightRepository()
     {
-        _csvFilePath = csvFilePath;
         _csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             HasHeaderRecord = true,
             Encoding = Encoding.UTF8
         };
     }
-
+    
     public async Task<IReadOnlyCollection<Flight>> GetAllAsync()
     {
-        Console.WriteLine($"Reading from {_csvFilePath}");
         if (!File.Exists(_csvFilePath))
             return [];
         using var reader = new StreamReader(_csvFilePath);
