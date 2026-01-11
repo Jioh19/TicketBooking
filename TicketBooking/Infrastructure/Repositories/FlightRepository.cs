@@ -45,7 +45,8 @@ public class FlightRepository : IFlightRepository
 
     public Task<DomainFlight?> GetByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var flights = GetAllAsync().Result;
+        return Task.FromResult(flights.FirstOrDefault(f => f.Id == id));
     }
 
     public Task<DomainFlight> AddAsync(DomainFlight entity)

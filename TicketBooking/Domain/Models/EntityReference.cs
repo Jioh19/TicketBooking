@@ -7,7 +7,7 @@ public class EntityReference<T> where T : struct
 
     public static EntityReference<T> Empty => new()
     {
-        Id = default(T),
+        Id = default,
         Name = string.Empty
     };
 
@@ -16,4 +16,6 @@ public class EntityReference<T> where T : struct
 
     public override int GetHashCode() =>
         Id.GetHashCode() + Name!.GetHashCode();
+    
+    public override string ToString() => $"{nameof(Id)}: {Id}, {nameof(Name)}: {Name}";
 }

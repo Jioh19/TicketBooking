@@ -9,7 +9,7 @@ public record Booking
     public long Id { get; init; }
     [Required]
     public EntityReference<long> Flight { get; init; } = EntityReference<long>.Empty;
-    [Required] 
+    [Required]
     public EntityReference<long> User { get; init; } = EntityReference<long>.Empty;
     [Required]
     public BookingState State { get; set; } = BookingState.Active;

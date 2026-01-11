@@ -4,8 +4,8 @@ namespace TicketBooking.Domain.Models;
 
 public record User
 {
-    [Required]
-    public long Id { get; init; }
+    [Required] 
+    public long Id { get; init; } 
     [Required]
     public string FirstName { get; init; } = string.Empty;
     [Required]
