@@ -9,4 +9,4 @@ var results = await repo.GetAllAsync();
 
 Console.WriteLine("Result");
 
-results.Where(res => res.FlightClass == FlightClass.Business).ToList().ForEach(Console.WriteLine);
+results.Where(res => res.FlightClass == FlightClass.FirstClass).ToList().ForEach(Console.WriteLine);

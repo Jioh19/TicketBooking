@@ -2,9 +2,11 @@
 using CsvHelper.Configuration;
 using System.Globalization;
 using System.Text;
-using TicketBooking.Domain.Models;
 using TicketBooking.Domain.Repositories;
+using TicketBooking.Infrastructure.Dtos;
+using TicketBooking.Infrastructure.Mappers;
 using TicketBooking.Infrastructure.Utils;
+using DomainFlight = TicketBooking.Domain.Models.Flight;
 
 namespace TicketBooking.Infrastructure.Repositories;
 
@@ -22,27 +24,43 @@ public class FlightRepository : IFlightRepository
         };
     }
     
-    public async Task<IReadOnlyCollection<Flight>> GetAllAsync()
+    public async Task<IEnumerable<DomainFlight>> GetAllAsync()
     {
         if (!File.Exists(_csvFilePath))
             return [];
         using var reader = new StreamReader(_csvFilePath);
         using var csv = new CsvReader(reader, _csvConfig);
-        var records = csv.GetRecords<Flight>().ToList();
-        return await Task.FromResult(records);
+        var records = await Task.FromResult(csv.GetRecords<FlightCsvDto>().ToList());
+        var validFlights = new List<DomainFlight>();
+
+        var line = 2;
+        foreach (var record in records)
+        {
+            try
+            {
+                var result = FlightMapper.ToDomain(record);
+                validFlights.Add(result);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine($"Invalid record on line {line}: {e.Message}");
+            }
+            ++line;
+        }
+        return validFlights;
     }
 
-    public Task<Flight?> GetByIdAsync(long id)
+    public Task<DomainFlight?> GetByIdAsync(long id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Flight> AddAsync(Flight entity)
+    public Task<DomainFlight> AddAsync(DomainFlight entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Flight?> UpdateAsync(Flight entity)
+    public Task<DomainFlight?> UpdateAsync(DomainFlight entity)
     {
         throw new NotImplementedException();
     }

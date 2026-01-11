@@ -2,7 +2,7 @@
 
 public interface IRepository<T> where T : class
 {
-    Task<IReadOnlyCollection<T>> GetAllAsync();
+    Task<IEnumerable<T>> GetAllAsync();
     Task<T?> GetByIdAsync(long id);
     Task<T> AddAsync(T entity);
     Task<T?> UpdateAsync(T entity);
