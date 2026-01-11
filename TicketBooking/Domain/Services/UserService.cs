@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TicketBooking.Domain.Models;
+﻿using TicketBooking.Domain.Models;
 
 namespace TicketBooking.Domain.Services;
 
 public class UserService : IUserService
 {
-    private readonly List<User> _users = [];
+    private long _userIdCounter = 1;
+    private readonly List<User> _users = new();
 
     public IEnumerable<User> GetAllUsers()
     {
@@ -35,8 +34,9 @@ public class UserService : IUserService
     
     public User AddUser(User user)
     {
-        ArgumentNullException.ThrowIfNull(user);
-        _users.Add(user);
-        return user;
+        if (user == null) throw new ArgumentNullException(nameof(user));
+        var newUser = user with { Id = _userIdCounter++ };
+        _users.Add(newUser);
+        return newUser;
     }
 }
