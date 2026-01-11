@@ -10,5 +10,8 @@ var serv = new FlightService(repo);
 var results = await serv.GetFlightsAsync();
 
 Console.WriteLine("Result");
-
-results.Where(res => res.FlightClass == FlightClass.FirstClass).ToList().ForEach(Console.WriteLine);
+serv.GetFlightsByParametersAsync("usa", null, FlightClass.FirstClass).Result.ToList().ForEach(Console.WriteLine);
+Console.WriteLine("Origin");
+serv.GetAllOriginsAsync().Result.ToList().ForEach(Console.WriteLine);
+Console.WriteLine("Destination");
+serv.GetAllDestinationsAsync().Result.ToList().ForEach(Console.WriteLine);

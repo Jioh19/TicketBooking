@@ -26,4 +26,29 @@ public class FlightService : IFlightService
         }
         return flight;
     }
+
+    public async Task<IEnumerable<Flight>> GetFlightsByParametersAsync(
+        string? origin = null,
+        string? destination = null,
+        FlightClass? flightClass = null)
+    {
+        var flights = await _flightRepository.GetAllAsync();
+        return flights.Where(f =>
+            (origin == null || string.Equals(f.DepartureCountry, origin, StringComparison.OrdinalIgnoreCase)) &&
+            (destination == null || string.Equals(f.DestinationCountry, destination, StringComparison.OrdinalIgnoreCase)) &&
+            (flightClass == null || f.FlightClass == flightClass)
+        );
+    }
+
+    public async Task<IEnumerable<string>> GetAllOriginsAsync()
+    {
+        var flights = await _flightRepository.GetAllAsync();
+        return flights.Where(f => !string.IsNullOrWhiteSpace(f.DepartureCountry)).Select(f => f.DepartureCountry).Distinct();
+    }
+
+    public async Task<IEnumerable<string>> GetAllDestinationsAsync()
+    {
+        var flights = await _flightRepository.GetAllAsync();
+        return flights.Where(f => !string.IsNullOrWhiteSpace(f.DestinationCountry)).Select(f => f.DestinationCountry).Distinct();
+    }
 }

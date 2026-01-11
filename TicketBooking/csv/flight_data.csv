@@ -1,11 +1,61 @@
 Price,DepartureCountry,DestinationCountry,DepartureDate,DepartureAirport,DestinationAirport,FlightClass
 450.00,USA,France,2026-02-15,JFK,CDG,Economy
-1250.50,UK,Japan,2026-03-20,LHR,NRT,Business
-320.75,Spain,Germany,2026-02-10,MAD,FRA,Economy
-2100.00,USA,Australia,2026-04-05,LAX,SYD,FirstClass
-580.25,Canada,Mexico,2026-02-28,YYZ,MEX,Economy
+1250.50,USA,France,2026-02-15,JFK,CDG,Business
+2850.00,USA,France,2026-02-15,JFK,CDG,FirstClass
+320.75,UK,Japan,2026-03-20,LHR,NRT,Economy
+1450.25,UK,Japan,2026-03-20,LHR,NRT,Business
+3100.00,UK,Japan,2026-03-20,LHR,NRT,FirstClass
+295.50,Spain,Germany,2026-02-10,MAD,FRA,Economy
+780.00,Spain,Germany,2026-02-10,MAD,FRA,Business
+1650.00,Spain,Germany,2026-02-10,MAD,FRA,FirstClass
+950.00,USA,Australia,2026-04-05,LAX,SYD,Economy
+2100.00,USA,Australia,2026-04-05,LAX,SYD,Business
+4500.00,USA,Australia,2026-04-05,LAX,SYD,FirstClass
+315.25,Canada,Mexico,2026-02-28,YYZ,MEX,Economy
+580.25,Canada,Mexico,2026-02-28,YYZ,MEX,Business
+1200.00,Canada,Mexico,2026-02-28,YYZ,MEX,FirstClass
+380.00,Brazil,Argentina,2026-03-12,GRU,EZE,Economy
 890.00,Brazil,Argentina,2026-03-12,GRU,EZE,Business
-425.50,Italy,Greece,2026-02-22,FCO,ATH,Economy
+1850.00,Brazil,Argentina,2026-03-12,GRU,EZE,FirstClass
+225.50,Italy,Greece,2026-02-22,FCO,ATH,Economy
+425.50,Italy,Greece,2026-02-22,FCO,ATH,Business
+950.00,Italy,Greece,2026-02-22,FCO,ATH,FirstClass
+825.75,UAE,Singapore,2026-03-18,DXB,SIN,Economy
 1850.75,UAE,Singapore,2026-03-18,DXB,SIN,Business
-675.00,Netherlands,Portugal,2026-02-14,AMS,LIS,Economy
-3200.00,USA,UAE,2026-04-10,ORD,DXB,FirstClass
+3900.00,UAE,Singapore,2026-03-18,DXB,SIN,FirstClass
+285.00,Netherlands,Portugal,2026-02-14,AMS,LIS,Economy
+675.00,Netherlands,Portugal,2026-02-14,AMS,LIS,Business
+1450.00,Netherlands,Portugal,2026-02-14,AMS,LIS,FirstClass
+1450.00,USA,UAE,2026-04-10,ORD,DXB,Economy
+3200.00,USA,UAE,2026-04-10,ORD,DXB,Business
+6800.00,USA,UAE,2026-04-10,ORD,DXB,FirstClass
+520.00,China,Thailand,2026-03-25,PEK,BKK,Economy
+1180.00,China,Thailand,2026-03-25,PEK,BKK,Business
+2650.00,China,Thailand,2026-03-25,PEK,BKK,FirstClass
+380.00,Germany,Sweden,2026-02-18,FRA,ARN,Economy
+890.00,Germany,Sweden,2026-02-18,FRA,ARN,Business
+1920.00,Germany,Sweden,2026-02-18,FRA,ARN,FirstClass
+650.00,South Korea,USA,2026-04-15,ICN,SFO,Economy
+1850.00,South Korea,USA,2026-04-15,ICN,SFO,Business
+4200.00,South Korea,USA,2026-04-15,ICN,SFO,FirstClass
+420.00,India,UK,2026-03-08,DEL,LHR,Economy
+1250.00,India,UK,2026-03-08,DEL,LHR,Business
+3100.00,India,UK,2026-03-08,DEL,LHR,FirstClass
+295.00,Turkey,Italy,2026-02-20,IST,FCO,Economy
+720.00,Turkey,Italy,2026-02-20,IST,FCO,Business
+1580.00,Turkey,Italy,2026-02-20,IST,FCO,FirstClass
+710.00,Mexico,Spain,2026-03-30,MEX,MAD,Economy
+1680.00,Mexico,Spain,2026-03-30,MEX,MAD,Business
+3750.00,Mexico,Spain,2026-03-30,MEX,MAD,FirstClass
+490.00,Egypt,Greece,2026-02-25,CAI,ATH,Economy
+1150.00,Egypt,Greece,2026-02-25,CAI,ATH,Business
+2480.00,Egypt,Greece,2026-02-25,CAI,ATH,FirstClass
+340.00,Poland,France,2026-03-05,WAW,CDG,Economy
+820.00,Poland,France,2026-03-05,WAW,CDG,Business
+1750.00,Poland,France,2026-03-05,WAW,CDG,FirstClass
+880.00,New Zealand,Australia,2026-04-20,AKL,SYD,Economy
+1950.00,New Zealand,Australia,2026-04-20,AKL,SYD,Business
+3850.00,New Zealand,Australia,2026-04-20,AKL,SYD,FirstClass
+625.00,South Africa,Kenya,2026-03-15,JNB,NBO,Economy
+1420.00,South Africa,Kenya,2026-03-15,JNB,NBO,Business
+2980.00,South Africa,Kenya,2026-03-15,JNB,NBO,FirstClass
