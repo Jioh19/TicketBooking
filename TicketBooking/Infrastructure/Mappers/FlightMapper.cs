@@ -8,7 +8,7 @@ namespace TicketBooking.Infrastructure.Mappers
 {
     public static class FlightMapper
     {
-        public static Flight ToDomain(FlightCsvDto dto)
+        public static Flight ToDomain(FlightCsvDto dto, int id)
         {
             var errors = FlightValidator.Validate(dto).ToList();
             if (errors.Count is not 0)
@@ -22,6 +22,7 @@ namespace TicketBooking.Infrastructure.Mappers
 
             var flight = new Flight
             {
+                Id = id,
                 Price = price,
                 DepartureCountry = dto.DepartureCountry,
                 DestinationCountry = dto.DestinationCountry,

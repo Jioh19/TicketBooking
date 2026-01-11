@@ -4,6 +4,8 @@ namespace TicketBooking.Domain.Models;
 
 public record Flight
 {
+    [Required]
+    public long Id { get; init; }
     [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
     public decimal Price { get; init; }
     [Required]

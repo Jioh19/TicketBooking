@@ -13,21 +13,14 @@ namespace TicketBooking.Infrastructure.Repositories;
 public class FlightRepository : IFlightRepository
 {
     private readonly string _csvFilePath = PathParser.GetPath("flight_data.csv");
-    private readonly CsvConfiguration _csvConfig;
-
-    public FlightRepository()
+    private readonly CsvConfiguration _csvConfig = new(CultureInfo.InvariantCulture)
     {
-        _csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            HasHeaderRecord = true,
-            Encoding = Encoding.UTF8
-        };
-    }
-    
+        HasHeaderRecord = true,
+        Encoding = Encoding.UTF8
+    };
+
     public async Task<IEnumerable<DomainFlight>> GetAllAsync()
     {
-        if (!File.Exists(_csvFilePath))
-            return [];
         using var reader = new StreamReader(_csvFilePath);
         using var csv = new CsvReader(reader, _csvConfig);
         var records = await Task.FromResult(csv.GetRecords<FlightCsvDto>().ToList());
@@ -38,7 +31,7 @@ public class FlightRepository : IFlightRepository
         {
             try
             {
-                var result = FlightMapper.ToDomain(record);
+                var result = FlightMapper.ToDomain(record, line - 2);
                 validFlights.Add(result);
             }
             catch(Exception e)
