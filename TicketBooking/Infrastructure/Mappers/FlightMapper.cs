@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using TicketBooking.Domain.Models;
+using TicketBooking.Domain.Models.Enums;
 using TicketBooking.Domain.Validations;
 using TicketBooking.Infrastructure.Dtos;
 

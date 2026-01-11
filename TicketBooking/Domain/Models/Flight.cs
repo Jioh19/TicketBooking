@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TicketBooking.Domain.Models.Enums;
 
 namespace TicketBooking.Domain.Models;
 

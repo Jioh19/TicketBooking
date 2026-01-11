@@ -1,4 +1,5 @@
 ﻿using TicketBooking.Domain.Models;
+using TicketBooking.Domain.Models.Enums;
 using TicketBooking.Domain.Repositories;
 
 namespace TicketBooking.Domain.Services;

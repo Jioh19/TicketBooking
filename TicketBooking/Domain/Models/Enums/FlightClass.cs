@@ -1,4 +1,4 @@
-﻿namespace TicketBooking.Domain.Models;
+﻿namespace TicketBooking.Domain.Models.Enums;
 
 public enum FlightClass
 {

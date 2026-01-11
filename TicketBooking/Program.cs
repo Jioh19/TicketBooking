@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using TicketBooking.Domain.Models;
+using TicketBooking.Domain.Models.Enums;
 using TicketBooking.Domain.Services;
 using TicketBooking.Infrastructure.Repositories;
 

@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using TicketBooking.Domain.Models.Enums;
 using TicketBooking.Infrastructure.Dtos;
 
 namespace TicketBooking.Domain.Validations
@@ -37,7 +38,7 @@ namespace TicketBooking.Domain.Validations
             
             if (string.IsNullOrWhiteSpace(flight.FlightClass))
                 errors.Add($"Flight class is required.");
-            else if (!Enum.TryParse(typeof(TicketBooking.Domain.Models.FlightClass), flight.FlightClass, out _))
+            else if (!Enum.TryParse(typeof(FlightClass), flight.FlightClass, out _))
                 errors.Add($"Flight class must be a valid value.");
 
             return errors;
