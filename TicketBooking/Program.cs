@@ -5,7 +5,8 @@ using TicketBooking.Infrastructure.Repositories;
 using TicketBooking.Presentation;
 
 var flightRepo = new FlightRepository();
-var flightServ = new FlightService(flightRepo);
+var flightService = new FlightService(flightRepo);
+var bookingService = new BookingService();
 var userService = new UserService();
-var menu = new Menu(userService);
-menu.Show();
+//Test.RunTest();
+var menu = new Menu(userService, bookingService, flightService); menu.Show();

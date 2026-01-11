@@ -7,10 +7,10 @@ public class Menu
     private readonly UserMenu _userMenu;
     private readonly AdminMenu _adminMenu;
 
-    public Menu(UserService userService)
+    public Menu(IUserService userService, IBookingService bookingService, IFlightService flightService)
     {
-        _adminMenu = new AdminMenu(userService);
-        _userMenu = new UserMenu(userService);
+        _adminMenu = new AdminMenu(userService, bookingService, flightService);
+        _userMenu = new UserMenu(userService, bookingService, flightService);
     }
 
     public void Show()

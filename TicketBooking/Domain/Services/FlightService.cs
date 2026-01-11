@@ -33,6 +33,8 @@ public class FlightService : IFlightService
         string? destination = null,
         FlightClass? flightClass = null)
     {
+        origin = string.IsNullOrWhiteSpace(origin) ? null : origin;
+        destination = string.IsNullOrWhiteSpace(destination) ? null : destination;
         var flights = await _flightRepository.GetAllAsync();
         return flights.Where(f =>
             (origin == null || string.Equals(f.DepartureCountry, origin, StringComparison.OrdinalIgnoreCase)) &&

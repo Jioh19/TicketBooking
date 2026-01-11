@@ -4,11 +4,15 @@ namespace TicketBooking.Presentation;
 
 public class AdminMenu
 {
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
+    private readonly IBookingService _bookingService;
+    private readonly IFlightService _flightService;
 
-    public AdminMenu(UserService userService)
+    public AdminMenu(IUserService userService, IBookingService bookingService, IFlightService flightService)
     {
         _userService = userService;
+        _bookingService = bookingService;
+        _flightService = flightService;
     }
 
     public void Show()
@@ -19,7 +23,6 @@ public class AdminMenu
             Console.WriteLine("=== Admin Menu ===");
             Console.WriteLine("1. View All Users");
             Console.WriteLine("2. View All Bookings");
-            Console.WriteLine("3. Import Flights from CSV");
             Console.WriteLine("0. Back to Main Menu");
             Console.Write("Select an option: ");
             var input = Console.ReadLine();
@@ -30,9 +33,6 @@ public class AdminMenu
                     break;
                 case "2":
                     ViewAllBookings();
-                    break;
-                case "3":
-                    ImportFlights();
                     break;
                 case "0":
                     return;
@@ -63,11 +63,24 @@ public class AdminMenu
 
     private void ViewAllBookings()
     {
-        throw new NotImplementedException();
+        Console.Clear();
+        var bookings = _bookingService.GetAllBookings().ToList();
+        if (bookings.Count == 0)
+        {
+            Console.WriteLine("No bookings found.");
+        }
+        else
+        {
+            Console.WriteLine("=== All Bookings ===");
+            foreach (var booking in bookings)
+            {
+                Console.WriteLine($"Id: {booking.Id}, State: {booking.State}\n" +
+                                  $"Flight: {_flightService.GetFlightByIdAsync(booking.Flight.Id)}\n" +
+                                  $"User: {_userService.GetUserById(booking.User.Id)}");
+            }
+        }
+        Console.WriteLine("Press any key to return...");
+        Console.ReadKey();
     }
-    
-    private void ImportFlights()
-    {
-        throw new NotImplementedException();
-    }
+
 }

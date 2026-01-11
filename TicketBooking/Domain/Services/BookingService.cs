@@ -6,6 +6,7 @@ namespace TicketBooking.Domain.Services;
 public class BookingService : IBookingService
 {
     private readonly List<Booking> _bookings = [];
+    private long _bookingIdCounter = 1;
     
     public IEnumerable<Booking> GetAllBookings()
     {
@@ -20,8 +21,9 @@ public class BookingService : IBookingService
     public Booking AddBooking(Booking booking)
     {
         if (booking == null) throw new ArgumentNullException(nameof(booking));
-        _bookings.Add(booking);
-        return booking;
+        var newBooking = booking with { Id = _bookingIdCounter++ };
+        _bookings.Add(newBooking);
+        return newBooking;
     }
 
     public void CancelBooking(long id)
