@@ -6,7 +6,8 @@ using TicketBooking.Presentation;
 
 var flightRepo = new FlightRepository();
 var flightService = new FlightService(flightRepo);
-var bookingService = new BookingService();
+var bookingRepo = new BookingRepository();
+var bookingService = new BookingService(bookingRepo);
 var userRepo = new UserRepository();
 var userService = new UserService(userRepo);
 //Test.RunTest();

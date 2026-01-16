@@ -1,29 +1,32 @@
 ﻿using TicketBooking.Domain.Models;
 using TicketBooking.Domain.Models.Enums;
+using TicketBooking.Domain.Repositories;
 
 namespace TicketBooking.Domain.Services;
 
 public class BookingService : IBookingService
 {
-    private readonly List<Booking> _bookings = [];
-    private long _bookingIdCounter = 1;
+    private readonly IBookingRepository _bookingRepository;
+
+    public BookingService(IBookingRepository bookingRepository)
+    {
+        _bookingRepository = bookingRepository;
+    }
     
     public IEnumerable<Booking> GetAllBookings()
     {
-        return _bookings;
+        return _bookingRepository.GetAllAsync().Result;
     }
 
     public Booking? GetBookingById(long id)
     {
-        return _bookings.FirstOrDefault(b => b.Id == id);
+        return _bookingRepository.GetByIdAsync(id).Result;
     }
 
     public Booking AddBooking(Booking booking)
     {
         if (booking == null) throw new ArgumentNullException(nameof(booking));
-        var newBooking = booking with { Id = _bookingIdCounter++ };
-        _bookings.Add(newBooking);
-        return newBooking;
+        return _bookingRepository.AddAsync(booking).Result;
     }
 
     public void CancelBooking(long id)
@@ -31,7 +34,8 @@ public class BookingService : IBookingService
         var booking = GetBookingById(id);
         if (booking != null)
         {
-            booking.State = BookingState.Cancelled;
+            var updatedBooking = booking with { State = BookingState.Cancelled };
+            _bookingRepository.UpdateAsync(updatedBooking);
         }
     }
 
@@ -40,21 +44,22 @@ public class BookingService : IBookingService
         var booking = GetBookingById(id);
         if (booking != null)
         {
-            booking.State = BookingState.Completed;
+            var updatedBooking = booking with { State = BookingState.Completed };
+            _bookingRepository.UpdateAsync(updatedBooking);
         }
     }
 
     public void ModifyBooking(long id, Booking booking)
     {
-        var index = _bookings.FindIndex(b => b.Id == id);
-        if (index >= 0)
+        var existingBooking = GetBookingById(id);
+        if (existingBooking != null)
         {
-            _bookings[index] = booking;
+            _bookingRepository.UpdateAsync(booking);
         }
     }
 
     public IEnumerable<Booking> GetBookingsByUserId(long userId)
     {
-        return _bookings.Where(b => b.User.Id == userId);
+        return _bookingRepository.GetByUserIdAsync(userId).Result;
     }
 }

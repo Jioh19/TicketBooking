@@ -21,11 +21,6 @@ public class UserRepository : IUserRepository
 
     public async Task<IEnumerable<DomainUser>> GetAllAsync()
     {
-        if (!File.Exists(_csvFilePath))
-        {
-            return new List<DomainUser>();
-        }
-
         using var reader = new StreamReader(_csvFilePath);
         using var csv = new CsvReader(reader, _csvConfig);
         var records = await Task.FromResult(csv.GetRecords<UserCsvDto>().ToList());
