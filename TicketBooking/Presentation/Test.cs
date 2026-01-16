@@ -1,4 +1,4 @@
-﻿using TicketBooking.Domain.Models;
+﻿﻿using TicketBooking.Domain.Models;
 using TicketBooking.Domain.Models.Enums;
 using TicketBooking.Domain.Services;
 using TicketBooking.Infrastructure.Repositories;
@@ -11,7 +11,8 @@ public static class Test
     {
         var flightRepo = new FlightRepository();
         var flightServ = new FlightService(flightRepo);
-        var userServ = new UserService();
+        var userRepo = new UserRepository();
+        var userServ = new UserService(userRepo);
         var bookingServ = new BookingService();
 
         var results = await flightServ.GetFlightsAsync();

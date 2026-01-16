@@ -1,42 +1,25 @@
 ﻿using TicketBooking.Domain.Models;
+using TicketBooking.Domain.Repositories;
 
 namespace TicketBooking.Domain.Services;
 
 public class UserService : IUserService
 {
-    private long _userIdCounter = 1;
-    private readonly List<User> _users = [];
+    private readonly IUserRepository _userRepository;
 
-    public UserService()
+    public UserService(IUserRepository userRepository)
     {
-        var user = new User
-        {
-            Id = 0,
-            FirstName = "John",
-            LastName = "Doe",
-            Username = "johndoe",
-            Email = "john@mail.com"
-        };
-        AddUser(user);
-        user = new User()
-        {
-            Id = 0,
-            FirstName = "Jane",
-            LastName = "Toe",
-            Username = "janetoe",
-            Email = "jane@mail.com"
-        };
-        AddUser(user);
+        _userRepository = userRepository;
     }
     
     public IEnumerable<User> GetAllUsers()
     {
-        return _users;
+        return _userRepository.GetAllAsync().Result;
     }
 
     public User? GetUserById(long id)
     {
-        var user = _users.FirstOrDefault(u => u.Id == id);
+        var user = _userRepository.GetByIdAsync(id).Result;
         if (user is null)
         {
             throw new Exception($"User with id {id} not found");
@@ -46,7 +29,7 @@ public class UserService : IUserService
 
     public User? GetUserByUsername(string username)
     {
-        var user = _users.FirstOrDefault(u => u.Username == username);
+        var user = _userRepository.GetByUsernameAsync(username).Result;
         if (user is null)
         {
             throw new Exception($"User with username {username} not found");
@@ -57,8 +40,12 @@ public class UserService : IUserService
     public User AddUser(User user)
     {
         if (user == null) throw new ArgumentNullException(nameof(user));
-        var newUser = user with { Id = _userIdCounter++ };
-        _users.Add(newUser);
-        return newUser;
+        
+        // Get next ID
+        var users = _userRepository.GetAllAsync().Result.ToList();
+        var nextId = users.Any() ? users.Max(u => u.Id) + 1 : 1;
+        
+        var newUser = user with { Id = nextId };
+        return _userRepository.AddAsync(newUser).Result;
     }
 }
