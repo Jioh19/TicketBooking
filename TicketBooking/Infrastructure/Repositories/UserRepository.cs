@@ -64,21 +64,19 @@ public class UserRepository : IUserRepository
     public async Task<DomainUser> AddAsync(DomainUser entity)
     {
         var users = (await GetAllAsync()).ToList();
-        
-        // Check if user with same username or email already exists
         if (users.Any(u => u.Username.Equals(entity.Username, StringComparison.OrdinalIgnoreCase)))
         {
             throw new InvalidOperationException($"User with username '{entity.Username}' already exists.");
         }
-        
         if (users.Any(u => u.Email.Equals(entity.Email, StringComparison.OrdinalIgnoreCase)))
         {
             throw new InvalidOperationException($"User with email '{entity.Email}' already exists.");
         }
-
-        users.Add(entity);
+        var nextId = users.Any() ? users.Max(u => u.Id) + 1 : 1;
+        var newUser = entity with { Id = nextId };
+        users.Add(newUser);
         await SaveAllAsync(users);
-        return entity;
+        return newUser;
     }
 
     public async Task<DomainUser?> UpdateAsync(DomainUser entity)
@@ -137,4 +135,3 @@ public class UserRepository : IUserRepository
         await csv.WriteRecordsAsync(dtos);
     }
 }
-
